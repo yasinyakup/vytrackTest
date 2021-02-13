@@ -10,35 +10,43 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import java.sql.DriverManager;
 
 public class Driver {
-    private WebDriver driver;
-    private final String BROWSER;
-    private final ConfigurationReader configurationReader;
+    private static WebDriver driver;
+    private static final ConfigurationReader configurationReader= new ConfigurationReader();;
+    private static final String BROWSER = System.getProperty("browser")!=null?
+            System.getProperty("browser"):
+            configurationReader.getValue("browser");;
 
-    public Driver() {
-        configurationReader = new ConfigurationReader();
-        BROWSER = configurationReader.getValue("browser");
-    }
 
-    public WebDriver getDriver(){
+    public static WebDriver getDriver(){
 
-        switch (BROWSER){
-            case "chrome"->{
-                WebDriverManager.chromedriver().setup();
-                driver=new ChromeDriver();
-            }
-            case "ie"    -> {
-                WebDriverManager.iedriver().setup();
-                driver = new InternetExplorerDriver();
-            }
-            case "firefox"-> {
-                WebDriverManager.firefoxdriver().setup();
-                driver = new FirefoxDriver();
-            }
-            case "safari" -> {
-                WebDriverManager.edgedriver().setup();
-                driver = new EdgeDriver();
+        if(driver == null) {
+            switch (BROWSER) {
+                case "chrome" -> {
+                    WebDriverManager.chromedriver().setup();
+                    driver = new ChromeDriver();
+                }
+                case "ie" -> {
+                    WebDriverManager.iedriver().setup();
+                    driver = new InternetExplorerDriver();
+                }
+                case "firefox" -> {
+                    WebDriverManager.firefoxdriver().setup();
+                    driver = new FirefoxDriver();
+                }
+                case "safari" -> {
+                    WebDriverManager.edgedriver().setup();
+                    driver = new EdgeDriver();
+                }
             }
         }
-        return this.driver;
+        return driver;
+    }
+
+    public static void closeAll(){
+        if (driver != null){
+            driver.quit();
+            driver = null;
+        }
+
     }
 }
