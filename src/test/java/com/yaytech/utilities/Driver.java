@@ -22,7 +22,7 @@ public class Driver {
     public static WebDriver getDriver(){
 
 
-        if(driver == null) {
+        if(parallelDriver.get() == null) {
             switch (BROWSER) {
                 case "chrome" -> {
                     WebDriverManager.chromedriver().setup();
@@ -47,9 +47,9 @@ public class Driver {
     }
 
     public static void closeAll(){
-        if (driver != null){
-            driver.quit();
-            driver = null;
+        if (parallelDriver.get() != null){
+            parallelDriver.get().quit();
+            parallelDriver.remove();
         }
 
     }
