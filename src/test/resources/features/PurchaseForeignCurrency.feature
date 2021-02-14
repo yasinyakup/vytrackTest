@@ -1,4 +1,4 @@
-@purchacecurrency
+@purchacecurrency @smoke
 Feature: Purchase Foreign Currency
 
   Background: the user is logged in

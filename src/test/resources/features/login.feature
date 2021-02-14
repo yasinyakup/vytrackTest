@@ -1,7 +1,8 @@
 
-@login
+@login @smoke
 Feature:login feature
 
+  @main @l1
   Scenario: login to zero_bank application
     Given the user is on the login page
     When enter "username" and "password" and click submit
@@ -9,6 +10,7 @@ Feature:login feature
 
 
 
+    @main
   Scenario Outline: login to zero_bank application with bad credentials
     Given the user is on the login page
     When enter "<username>" and "<password>" and click submit

@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.safari.SafariDriver;
 
 import java.sql.DriverManager;
 
@@ -16,30 +17,33 @@ public class Driver {
             System.getProperty("browser"):
             configurationReader.getValue("browser");;
 
+      private static InheritableThreadLocal<WebDriver> parallelDriver = new InheritableThreadLocal<>();
 
     public static WebDriver getDriver(){
+
 
         if(driver == null) {
             switch (BROWSER) {
                 case "chrome" -> {
                     WebDriverManager.chromedriver().setup();
-                    driver = new ChromeDriver();
+                    parallelDriver.set(new ChromeDriver());
                 }
                 case "ie" -> {
                     WebDriverManager.iedriver().setup();
-                    driver = new InternetExplorerDriver();
+                    parallelDriver.set(new InternetExplorerDriver());
                 }
                 case "firefox" -> {
                     WebDriverManager.firefoxdriver().setup();
-                    driver = new FirefoxDriver();
+                    parallelDriver.set(new FirefoxDriver());
                 }
                 case "safari" -> {
                     WebDriverManager.edgedriver().setup();
-                    driver = new EdgeDriver();
+                    parallelDriver.set(new SafariDriver());
                 }
             }
         }
-        return driver;
+        return parallelDriver.get();
+
     }
 
     public static void closeAll(){
