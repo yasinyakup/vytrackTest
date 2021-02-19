@@ -21,21 +21,25 @@ public class Driver {
 
         if(driver == null) {
             switch (BROWSER) {
-                case "chrome" -> {
+                case "chrome": {
                     WebDriverManager.chromedriver().setup();
                     driver = new ChromeDriver();
+                    break;
                 }
-                case "ie" -> {
+                case "ie": {
                     WebDriverManager.iedriver().setup();
                     driver = new InternetExplorerDriver();
+                    break;
                 }
-                case "firefox" -> {
+                case "firefox": {
                     WebDriverManager.firefoxdriver().setup();
                     driver = new FirefoxDriver();
+                    break;
                 }
-                case "safari" -> {
+                case "safari": {
                     WebDriverManager.edgedriver().setup();
                     driver = new EdgeDriver();
+                    break;
                 }
             }
         }
