@@ -149,8 +149,8 @@ public class FindTransaction {
     }
     @Then("results table should show no result under Withdrawal")
     public void results_table_should_show_no_result_under_withdrawal() {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
-        wait.until(ExpectedConditions.refreshed(ExpectedConditions.stalenessOf(accountActivity.transactionTable)));
+//        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+//        wait.until(ExpectedConditions.refreshed(ExpectedConditions.stalenessOf(accountActivity.transactionTable)));
         List<WebElement> withdrawColumn =
                     accountActivity.withdrawalColumn.stream().filter(depo -> depo.getText() != "" && depo.getText() != null)
                             .collect(Collectors.toList());

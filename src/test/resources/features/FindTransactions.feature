@@ -5,7 +5,7 @@ Feature: Find Transactions in Account Activity
     Given the user is on the login page
     When enter "username" and "password" and click submit
     Then the user should login and display "username"
-  @main @find1
+  @main @find1 @l1
   Scenario: Search date range
     Given the user accesses the Find Transactions tab
     When the user enters date range from "2012-09-01" to "2012-09-06"
@@ -29,7 +29,7 @@ Feature: Find Transactions in Account Activity
     When the user enters description "OFFICE"
     And clicks search
     Then results table should only show descriptions containing "OFFICE"
-    But results table should not show descriptions containing "OFFICE"
+    But results table should not show descriptions containing "ONLINE"
   @main
   Scenario: Search description case insensitive
     Given the user accesses the Find Transactions tab
@@ -48,6 +48,7 @@ Feature: Find Transactions in Account Activity
     When user selects type "Deposit"
     Then results table should show at least one result under Deposit
     But results table should show no result under Withdrawal
-    When user selects type "Withdrawal"
+    When the user accesses the Find Transactions tab
+    And user selects type "Withdrawal"
     Then results table should show at least one result under Withdrawal
     But results table should show no result under Deposit
